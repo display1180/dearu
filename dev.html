@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@600&display=swap');
+        html {
+            height: 100vh;
+
+            position:relative;
+        }
+        body {
+            background: #fff;
+            height: 500vh;
+            margin:0;
+            color:#111;
+            font-family:'Nunito', cursive;
+        }
+        canvas {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            max-height: 100vh;
+            max-width: 100vw;
+            transform: translate(-50%, -50%);
+        }
+        .ratio {position:fixed; top:0; left:0;z-index:999; color:#000;}
+
+        .sect {height:100vh; background:white; }
+        /* .sect2 {background:orange;}
+        .sect3 {background:yellow;}
+        .sect4 {background:green}
+        .sect5 {background:navy;} */
+
+        div.fixed {position:fixed; top:0; left:0;}
+        div.fixed dl {display:flex; flex-direction:row;justify-content:center; align-items:center; width:100%;height:100vh;margin-top:0; font-size: 60px;}
+        div.fixed dl dt {padding-left: 100px;transform:translateY(-43px)}
+        div.fixed dl dt img{width: 150px;display:block;}
+        ul, li {list-style:none;}
+        div.fixed li {opacity:0.2;}
+        div.fixed li.active {opacity:1;}
+        div.fixed dd {transition:0.5s ease-in-out; margin-top:-100px}
+        div.fixed dd ul {height:100vh; animation:upward 10s 0.5s infinite;}
+        div.fixed dd ul li { animation:upward 10s 0.5s infinite;white-space:nowrap;transition:0.25s all;}
+        @keyframes upward {
+            0% {transform:translateY(0)}
+            10% {transform:translateY(-41px)}
+            20% {transform:translateY(-82px)}
+            30% {transform:translateY(-123px)}
+            40% {transform:translateY(-164px)}
+            50% {transform:translateY(-205px)}
+            60% {transform:translateY(-246px)}
+            70% {transform:translateY(-287px)}
+            80% {transform:translateY(-328px)}
+            90% {transform:translateY(-369px)}
+            100% {transform:translateY(-410px)}
+        }
+    </style>
+</head>
+<body>
+    <p class="ratio">22</p>
+    <div class="fixed">
+        <dl>
+            <dt><img src="img_splash.png" alt="splash"></dt>
+            <dd>
+                <ul>
+                    <li>Start for JYPNation</li>
+                    <li>with STARS</li>
+                    <li>for IST</li>
+                    <li>for WM</li>
+                    <li class="active" >for SPORTS</li>
+                    <li>for TOP</li>
+                    <li>for JELLYFISH</li>
+                    <li>for RBW</li>
+                    <li>for ACTORS</li>
+                    <li>for TREASURE HUNTER</li>
+                    <li>for JYPNation</li>
+                    <li>with STARS</li>
+                    <li>for IST</li>
+                    <li>for WM</li>
+                    <li >for SPORTS</li>
+                    <li>for TOP</li>
+                    <li>for JELLYFISH</li>
+                    <li>for RBW</li>
+                    <li>for ACTORS</li>
+                    <li>for TREASURE HUNTER</li>
+                    <li>for JYPNation</li>
+                    <li>with STARS</li>
+                    <li>for IST</li>
+                    <li>for WM</li>
+                    <li >for SPORTS</li>
+                    <li>for TOP</li>
+                    <li>for JELLYFISH</li>
+                    <li>for RBW</li>
+                    <li>for ACTORS</li>
+                    <li>End for TREASURE HUNTER</li>
+                </ul>
+            </dd>
+        </dl>
+        <d class="bubble">
+            
+        </h1>
+
+    </div>
+    <section class="sect sect1"></section>
+    <section class="sect sect2"></section>
+    <section class="sect sect3"></section>
+    <section class="sect sect4"></section>
+    <section class="sect sect5"></section>
+    
+    <script>
+
+        const html = document.documentElement;
+        //const canvas = document.getElementById("item");
+       // const context = canvas.getContext('2d');
+        const frameCount = 148;
+        const ratio = document.querySelector('.ratio');
+        const currentFrame = index => (
+        `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index.toString().padStart(4, '0')}.jpg`
+    )
+
+    // Set canvas dimensions
+    // canvas.width=1158;
+    // canvas.height=770;
+
+    // Create, load and draw the image
+    const img = new Image()
+    img.src = currentFrame(1); // we'll make this dynamic in the next step, for now we'll just load image 1 of our sequence
+    img.onload=function(){
+    // context.drawImage(img, 0, 0);
+    }
+
+    window.addEventListener('scroll', () => {  
+        const scrollTop = html.scrollTop;
+        const bodyScrollTop = document.body.scrollTop;
+        const maxScrollTop = html.scrollHeight - window.innerHeight;
+        const scrollFraction = scrollTop / maxScrollTop;
+        const scrollFraction2 = (scrollTop + window.innerHeight) / (maxScrollTop - window.innerHeight);
+        const frameIndex = Math.min(
+            frameCount - 1,
+            Math.floor(scrollFraction * frameCount)
+        );
+        ratio.innerHTML = 'scrollFraction : ' + scrollFraction + '<br> scrollTop : ' + scrollTop + '<br> scrollFraction2 :' + scrollFraction2 + '<br> MaxScrollTop :' + maxScrollTop;
+        if (scrollTop > window.innerHeight) {
+            ratio.innerHTML = 'done';
+        }
+    });
+    let infiniteLoop = true;
+    setInterval(function(){
+        if (infiniteLoop) {
+            $('li.active').removeClass('active').next('li').addClass('active');    
+        }
+    }, 1000)
+    //requestAnimationFrame(() => updateImage(frameIndex + 1));
+    </script>
+</body>
+</html>
